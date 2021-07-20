@@ -1,0 +1,81 @@
+{
+  "exp": "exp1",
+  "mode": "2D",
+  "data_path": "../input/navier-stokes-pde/NavierStokes_V1e-5_N1200_T20/NavierStokes_V1e-5_N1200_T20.mat",
+  "ntrain": 800,
+  "ntest": 200,
+  "S": 64,
+  "batch_size": 20,
+  "sub": 1,
+  "T_in": 10,
+  "T": 10,
+  "step": 1,
+  "model": {
+    "input_shape": [64, 64, 12],
+    "width": 20,
+    "fno": {
+      "count": 4,
+      "modes1": 12,
+      "modes2": 12
+    },
+    "dense": {
+      "count": 2,
+      "nunits": [128, 64],
+      "activation": "relu",
+      "rates": [0.2, 0.1]
+    }
+  },
+  "trainer": {
+    "optimizer": {
+      "name": "adam",
+      "params": {
+        "learning_rate": 1e-3
+      }
+    },
+    "loss": {
+      "name": "lploss",
+      "params": {
+        "p": 2,
+        "d": 2
+      }
+    },
+    "metrics": ["mae"],
+    "num_epochs": 50
+  },
+ "callbacks":{
+    "cyclic_lr": {
+      "exist": false,
+      "base_lr": 1e-3,
+      "max_lr": 1e-2,
+      "step_size": 2000,
+      "mode": "triangular",
+      "gamma": 1
+    },
+    "checkpoint": {
+      "exist": true,
+      "monitor": "val_loss",
+      "mode": "auto",
+      "save_best_only": true,
+      "save_weights_only": true,
+      "verbose": true
+    },
+    "tensor_board": {
+      "exist": false,
+      "write_graph": true
+    },
+    "early_stopping": {
+      "exist": true,
+      "monitor":"val_loss",
+      "patience": 8,
+      "restore_best_weights": true
+    },
+    "reduce_lr_on_plateau": {
+      "exist": true,
+      "monitor": "val_loss",
+      "factor": 0.5,
+      "patience": 2,
+      "min_lr": 1e-6
+    }
+  }
+
+}
