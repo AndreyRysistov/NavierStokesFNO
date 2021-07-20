@@ -1,8 +1,9 @@
 import os
-from tensorflow.keras import callbacks
-from trainers.trainer_setup import *
-from animate.plot_functions import plot_history, animate_prediction
 import numpy as np
+from trainers.trainer_setup import *
+from animate.plot_functions import *
+from callbacks.cyclic_lr import CyclicLR
+from tensorflow.keras import callbacks
 
 
 class ModelTrainer:
@@ -97,7 +98,7 @@ class ModelTrainer:
             )
         if self.config.callbacks.cyclic_lr.exist:
             self.callbacks.append(
-                callbacks.CyclicLR(
+                CyclicLR(
                     base_lr=self.config.callbacks.cyclic_lr.base_lr,
                     max_lr=self.config.callbacks.cyclic_lr.max_lr,
                     step_size=self.config.callbacks.cyclic_lr.step_size,
