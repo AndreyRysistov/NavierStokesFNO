@@ -1,5 +1,4 @@
 import os
-import numpy as np
 from trainers.trainer_setup import *
 from animate.plot_functions import *
 from callbacks.cyclic_lr import CyclicLR
@@ -19,19 +18,19 @@ class ModelTrainer:
         self.model.load_weights(os.path.join(self.config.callbacks.checkpoint.dir, 'best_model.hdf5'))
         self.model.save(os.path.join(self.config.callbacks.checkpoint.dir, 'model.hdf5'))
         self._save_history(history=history)
-        self._animate_prediction(data=train_data)
+        self._animate_prediction(data=train_data, subset='training')
         print('Model training completed successfully')
         return self.model
 
     def test(self, data):
         self.model.load_weights(os.path.join(self.config.callbacks.checkpoint.dir, 'best_model.hdf5'))
         scores = self.model.evaluate(data, verbose=1)
-        self._animate_prediction(data=data)
+        self._animate_prediction(data=data, subset='test')
         print("Achieved an MAE: %.2f%%\n" % (scores[1]))
 
-    def _animate_prediction(self, data):
+    def _animate_prediction(self, data, subset='training'):
         animation = animate_prediction(self.model, data)
-        path = os.path.join(self.config.graphics.dir, 'navie_stokes.mp4')
+        path = os.path.join(self.config.graphics.dir, f'{subset}_navie_stokes.mp4')
         animation.save(path, dpi=100, savefig_kwargs={'frameon': False, 'pad_inches': 0})
         print(f'Animation of predictions was saved to {path}')
 
@@ -94,7 +93,8 @@ class ModelTrainer:
                 callbacks.EarlyStopping(
                     monitor=self.config.callbacks.early_stopping.monitor,
                     patience=self.config.callbacks.early_stopping.patience,
-                    restore_best_weights=self.config.callbacks.early_stopping.restore_best_weights
+                    restore_best_weights=self.config.callbacks.early_stopping.restore_best_weights,
+                    verbose=1
                 )
             )
         if self.config.callbacks.cyclic_lr.exist:

@@ -42,6 +42,8 @@ def animate_prediction(model, datagen, step=1, T=10):
             axis=-1)
             axes[0].imshow(y);
             axes[1].imshow(y_pred.reshape(y_pred.shape[-3:]));
+            axes[0].set_title('True behavior')
+            axes[0].set_title('Predict behavior')
             camera.snap()
     animation = camera.animate(interval=500, blit=True)
     HTML(animation.to_html5_video())
