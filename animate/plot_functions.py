@@ -1,5 +1,5 @@
 import matplotlib
-import matplotlib as plt
+import matplotlib.pyplot as plt
 from IPython.display import HTML
 from celluloid import Camera
 import numpy as np
@@ -26,7 +26,7 @@ def plot_history(history):
 
 
 def animate_prediction(model, datagen, step=1, T=10):
-    fig, axes = plt.subplots(1, 2, figsize=(10, 8))
+    fig, axes = plt.subplots (1, 2, figsize=(10, 8))
     camera = Camera(fig)
     for xx, yy in zip(datagen[0][0], datagen[0][1]):
         x = np.expand_dims(xx, axis=0)

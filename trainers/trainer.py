@@ -63,7 +63,7 @@ class ModelTrainer:
 
     def _init_callbacks(self):
         def lr_exp_decay(epoch, lr):
-            k = 0.01
+            k = 0.001
             return self.config.trainer.optimizer.params.learning_rate * np.exp(-k * epoch)
         self.callbacks.append(
             callbacks.LearningRateScheduler(

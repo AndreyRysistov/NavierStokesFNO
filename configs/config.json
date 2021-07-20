@@ -26,7 +26,7 @@
     }
   },
   "trainer": {
-    "num_epochs": 50,
+    "num_epochs": 80,
     "optimizer": {
       "name": "adam",
       "params": {
@@ -44,10 +44,10 @@
   },
  "callbacks":{
     "cyclic_lr": {
-      "exist": false,
+      "exist": true,
       "base_lr": 1e-3,
       "max_lr": 1e-2,
-      "step_size": 2000,
+      "step_size": 3000,
       "mode": "triangular",
       "gamma": 1
     },
