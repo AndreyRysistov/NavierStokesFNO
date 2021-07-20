@@ -44,7 +44,7 @@
   },
  "callbacks":{
     "cyclic_lr": {
-      "exist": true,
+      "exist": false,
       "base_lr": 1e-3,
       "max_lr": 1e-2,
       "step_size": 2000,
@@ -73,7 +73,7 @@
       "exist": true,
       "monitor": "val_loss",
       "factor": 0.5,
-      "patience": 2,
+      "patience": 5,
       "min_lr": 1e-6
     }
   }

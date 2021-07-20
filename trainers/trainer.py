@@ -67,7 +67,8 @@ class ModelTrainer:
             return self.config.trainer.optimizer.params.learning_rate * np.exp(-k * epoch)
         self.callbacks.append(
             callbacks.LearningRateScheduler(
-                lr_exp_decay
+                lr_exp_decay,
+                verbose=1
             )
         )
         if self.config.callbacks.checkpoint.exist:
