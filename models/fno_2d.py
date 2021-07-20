@@ -66,7 +66,7 @@ class FConv2D(tf.keras.layers.Layer):
         return output
 
     def get_config(self):
-        config = super(FNO_block, self).get_config()
+        config = super(FConv2D, self).get_config()
         config.update({"output_dim": self.output_dim, "modes1": self.modes2, "modes2": self.modes2})
         return config
 
@@ -99,7 +99,7 @@ class BlockFNO2D(layers.Layer):
         return x
 
     def get_config(self):
-        config = super(FNO_block, self).get_config()
+        config = super(BlockFNO2D, self).get_config()
         config.update({"output_dim": self.output_dim, "modes1": self.modes2, "modes2": self.modes2})
         return config
 
