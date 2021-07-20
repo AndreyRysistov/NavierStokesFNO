@@ -25,12 +25,12 @@ class ModelTrainer:
         self.model.load_weights(os.path.join(self.config.callbacks.checkpoint.dir, 'best_model.hdf5'))
         scores = self.model.evaluate(data, verbose=1)
         self._animate_prediction(data=data)
-        print("Achieved an accuracy of: %.2f%%\n" % (scores[1]))
+        print("Achieved an MAE: %.2f%%\n" % (scores[1]))
 
     def _animate_prediction(self, data):
         animation = animate_prediction(self.model, data)
-        path = os.path.join(self.config.graphics.dir, 'navie_stokes.gif')
-        animation.save(path,dpi=100,savefig_kwargs={'frameon': False,'pad_inches': 0})
+        path = os.path.join(self.config.graphics.dir, 'navie_stokes.mp4')
+        animation.save(path, dpi=100, savefig_kwargs={'frameon': False, 'pad_inches': 0})
         print(f'Animation of predictions was saved to {path}')
 
     def _save_history(self, history, step=0):
