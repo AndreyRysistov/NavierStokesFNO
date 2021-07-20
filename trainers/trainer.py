@@ -2,6 +2,7 @@ import os
 from tensorflow.keras import callbacks
 from trainers.trainer_setup import *
 from animate.plot_functions import plot_history, animate_prediction
+import numpy as np
 
 
 class ModelTrainer:
@@ -60,6 +61,14 @@ class ModelTrainer:
         return history
 
     def _init_callbacks(self):
+        def lr_exp_decay(epoch, lr):
+            k = 0.01
+            return self.config.trainer.optimizer.params.learning_rate * np.exp(-k * epoch)
+        self.callbacks.append(
+            callbacks.LearningRateScheduler(
+                lr_exp_decay
+            )
+        )
         if self.config.callbacks.checkpoint.exist:
             self.callbacks.append(
                 callbacks.ModelCheckpoint(
