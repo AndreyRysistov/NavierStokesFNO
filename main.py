@@ -24,6 +24,7 @@ if __name__ == "__main__":
     model = FNO2D(config)
     trainer = ModelTrainer(config, model)
     trainer.train(train_gen, test_gen)
+    trainer.test(test_gen)
 
 
 

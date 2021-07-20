@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+from celluloid import Camera
+import numpy as np
 import seaborn as sns
 import pandas as pd
 import PIL
@@ -73,3 +75,30 @@ def plot_history(history):
     axes[1].set_xlabel('Epoch')
     axes[1].legend(['Train', 'Test'])
     return fig
+
+
+def animate_prediction(model, datagen, step=1, T=10):
+    fig = plt.figure(figsize=(10, 8))
+    camera = Camera(fig)
+    for xx, yy in zip(datagen[0][0], datagen[0][1]):
+        x = np.expand_dims(xx, axis=0)
+        for t in range(0, T):
+            ax1 = fig.add_subplot(121)
+            ax2 = fig.add_subplot(122)
+            y = yy[..., t:t + step]
+            y_pred = model.predict(x)
+            x = np.concatenate((
+                x[..., step:-2],
+                y_pred,
+                model.gridx.repeat(1, axis=0),
+                model.gridy.repeat(1, axis=0)
+            ),
+                axis=-1)
+            ax1.imshow(y);
+            ax2.imshow(y_pred.reshape(y_pred.shape[-3:]));
+
+            ax1.set_title(f'Time: {t + 1}')
+            ax2.set_title(f'Time: {t + 1}')
+            camera.snap()
+        animation = camera.animate(interval=500, blit=True)
+        return animation
