@@ -26,6 +26,7 @@
     }
   },
   "trainer": {
+    "num_epochs": 1,
     "optimizer": {
       "name": "adam",
       "params": {
@@ -39,8 +40,7 @@
         "d": 2
       }
     },
-    "metrics": ["mae"],
-    "num_epochs": 1
+    "metrics": ["mae"]
   },
  "callbacks":{
     "cyclic_lr": {
