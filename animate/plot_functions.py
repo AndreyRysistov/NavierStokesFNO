@@ -22,6 +22,7 @@ def plot_history(history):
     axes[1].set_ylabel('MAE')
     axes[1].set_xlabel('Epoch')
     axes[1].legend(['Train', 'Test'])
+    plt.show()
     return fig
 
 

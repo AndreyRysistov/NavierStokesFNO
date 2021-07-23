@@ -36,7 +36,8 @@ class ModelTrainer:
 
     def _save_history(self, history, step=0):
         path = os.path.join(self.config.graphics.dir, 'history.jpg')
-        plot_history(history).savefig(path)
+        fig = plot_history(history)
+        fig.savefig(path)
         print(f'Graph of history of the loss function and accuracy was saved to {path}')
 
     def _fit(self, train_data, val_data, step=0):
