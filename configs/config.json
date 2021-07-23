@@ -20,9 +20,9 @@
     },
     "dense": {
       "count": 2,
-      "nunits": [65, 128],
+      "nunits": [128, 64],
       "activation": "relu",
-      "rates": [0.2, 0.2]
+      "rates": [0.2, 0.1]
     }
   },
   "trainer": {
@@ -46,7 +46,7 @@
     "cyclic_lr": {
       "exist": true,
       "base_lr": 1e-4,
-      "max_lr": 1e-3,
+      "max_lr": 1e-2,
       "step_size": 3000,
       "mode": "triangular",
       "gamma": 1
