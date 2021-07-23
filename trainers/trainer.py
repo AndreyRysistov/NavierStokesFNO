@@ -35,7 +35,7 @@ class ModelTrainer:
         print(f'Animation of predictions was saved to {path}')
 
     def _save_history(self, history, step=0):
-        path = os.path.join(self.config.graphics.dir, 'history')
+        path = os.path.join(self.config.graphics.dir, 'history.jpg')
         plot_history(history).savefig(path)
         print(f'Graph of history of the loss function and accuracy was saved to {path}')
 
