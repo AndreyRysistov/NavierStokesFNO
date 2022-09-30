@@ -1,11 +1,11 @@
 {
   "exp": "exp1",
   "mode": "2D",
-  "data_path": "data/NavierStokes_V1e-5_N1200_T20.mat",
+  "data_path": "./data/NavierStokes_V1e-5_N1200_T20.mat",
   "ntrain": 1000,
   "ntest": 200,
   "S": 64,
-  "batch_size": 20,
+  "batch_size": 10,
   "sub": 1,
   "T_in": 10,
   "T": 10,

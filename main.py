@@ -4,9 +4,12 @@ from models.fno_2d import FNO2D
 from trainers.trainer import ModelTrainer
 from utils.args import get_args
 from utils.config import process_config
-
+from utils.check_configuration import check_configuration
+import os
 
 if __name__ == "__main__":
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+    check_configuration()
     args = get_args()  # parse args
     config = process_config(args.config)  # load config
     try:

@@ -35,10 +35,6 @@ class FConv2D(tf.keras.layers.Layer):
         ], axis=-1)
 
     def call(self, x):
-        #batch_size = tf.shape(x)[0]
-        #size_x = x.shape[1]
-        #size_y = x.shape[2]
-        # out_ft = tf.zeros((batch_size, self.out_channels, size_x, size_y//2+1, 2))
         x = tf.transpose(x, perm=[0, 3, 1, 2])
         x_ft = tf.signal.rfft2d(x) / (x.shape[-1] * x.shape[-2]) ** 0.5
         real = tf.expand_dims(tf.math.real(x_ft), axis=-1)
